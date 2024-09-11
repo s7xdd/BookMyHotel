@@ -1,0 +1,111 @@
+.header {
+    display: flex;
+    width: 100%;
+  }
+
+  .header .logo{
+    display: flex;
+  }
+
+  .header span{
+    margin: 20px 5px 0 5px;
+    display: flex;
+    width: 88%;
+    justify-content:space-between;
+  }
+  
+  .header input {
+    margin-left: 100px;
+    opacity: 90%;
+    background-color: white;
+    padding: 15px;
+    border: 2px solid #dddddd;
+    border-radius: 50px;
+    color: black;
+    outline: 0;
+    font-size: 15px;
+    font-weight: bold;
+    width: 480px;
+  }
+  .header_text {
+    opacity: 0.6;
+    font-weight: normal;
+  }
+  .mobile_text,
+  .mobile_icon {
+    display: none;
+  }
+  .svglogo {
+    position: relative;
+    top: 0.7vh;
+  }
+  span h2 {
+    font-family: cursive;
+    margin-left: 5px;
+    font-weight: normal;
+    margin-top: 7px;
+  }
+  .header_icon {
+    display: flex;
+    top: 9px;
+    left: 10%;
+    position: relative;
+    cursor: pointer;
+  }
+  .header_icon svg {
+    margin-top: 3px;
+  }
+  @media (max-width: 1064px) {
+    .header_icon {
+      left: 2%;
+      position: none;
+    }
+  }
+  @media (max-width: 952px) {
+    .header_icon h3 {
+      display: none;
+    }
+    .header input {
+      width: 57vw;
+      padding: 2%;
+      margin-left: 65px;
+    }
+  }
+  @media (max-width: 751px) {
+    
+    .header span{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .header .logo_text{
+        display: none;
+    }
+
+    .header input{
+      padding: 0px;
+      border: 2px solid #dddddd;
+      border-radius: 50px;
+      color: black;
+      cursor: pointer;
+      outline: 0;
+      font-size: 15px;
+      font-weight: bold;
+      width: 45vw;
+      padding: 2%;
+    }
+    .header_text {
+     
+    }
+    .header_icon {
+     
+    }
+  }
+  @media (max-width: 440px) {
+    .mobile_icon {
+      left: -4%;
+    }
+  }
+  
