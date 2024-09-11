@@ -12,7 +12,7 @@ class Navbar extends React.Component {
     }
   
     handleScroll = () => {
-      if (window.pageYOffset > 70) {
+      if (window.scrollY > 70) {
         if (!this.state.nav) {
           this.setState({ nav: true });
         }
