@@ -10,7 +10,7 @@
   }
 
   .contents_list {
-    margin: 30px 5px 40px 5px;
+    margin: 50px 5px 50px 5px;
     width: 100%;
     object-fit: cover;
     border-radius: 15px;
@@ -32,7 +32,7 @@
   
 .bighome {
     position: relative;
-    padding: 30px 0 0 0;
+    padding: 80px 100px 0 100px;
     background-color: black;
     color: white;
   }
@@ -44,6 +44,7 @@
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
+    margin: 0 100px 0 100px;
     a {
         text-decoration: none;
         color: black;
@@ -78,8 +79,8 @@
     position: absolute;
     bottom: 8.5%;
     right: 0;
-    width: 55%;
-    margin: 20px 1% 10px 0.5%;
+    width: 45%;
+    margin: 20px 8% 10px 0.5%;
     border: 1px solid #dddddd;
     cursor: pointer;
     border-radius: 10px;
