@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer_container">
         <div className="footer_inner">
-            <div>Copyright BookMyHotel 2024</div>
+            <div> &#169; Copyright BookMyHotel 2024</div>
             <div className='socials'>
                 <FaGithub size={25} />
                 <FaLinkedin size={25}/>

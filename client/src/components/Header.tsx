@@ -1,4 +1,5 @@
-import "../styles/header.css"
+import { Link } from "react-router-dom";
+import "../styles/header.css";
 import { IoLogoDribbble } from "react-icons/io";
 
 const Header = () => {
@@ -6,9 +7,8 @@ const Header = () => {
     <div className="header">
       <span>
         <div className="logo">
-            <IoLogoDribbble size={40}/>
-            <h2 className="logo_text">BookMyHotel</h2>
-
+          <IoLogoDribbble size={40} />
+          <h2 className="logo_text">BookMyHotel</h2>
         </div>
         <input
           type="text"
@@ -16,7 +16,14 @@ const Header = () => {
           className="header_text"
         />
         <div className="header_icon">
-          <h3> Host your home</h3>
+          <div style={{ display: "flex", gap: "25px" }}>
+            <Link to={'/login'}>
+              <h3>Login</h3>
+            </Link>
+            <Link to={'/signup'}>
+              <h3>Signup</h3>
+            </Link>
+          </div>
           <svg
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"

@@ -4,7 +4,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    height: 80px;
+    height: 100px;
 }
 
 .footer_inner{
@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    font-size: 17px;
 }
 
 .socials{

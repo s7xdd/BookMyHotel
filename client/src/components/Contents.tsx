@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../styles/contents.css'
 
 const Contents = ({img, title, description, amount, big, id}) => {

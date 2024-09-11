@@ -12,6 +12,7 @@ const Homepage = () => {
       <div className="home_cont">
         {Maincontents &&
           Maincontents.map((item) => (
+            <Link to={`/${item.title}`}>
             <div key={item.id}>
               <Contents
                 id={item.id}
@@ -20,6 +21,7 @@ const Homepage = () => {
                 description={item.description}
               />
             </div>
+            </Link>
           ))}
       </div>
       <div className="bighome">
@@ -44,11 +46,12 @@ const Homepage = () => {
         </div>
         <button className="E_btn">Explore all</button>
       </div>
+      <div className="homepage_experiences">
+ 
       <div className="home_cont">
         {Content &&
           Content.map((item) => (
             <div key={item.id}>
-              <Link to={`/result/${item.id}`} className="link">
                 <Contents
                   id={item.id}
                   img={item.img}
@@ -56,9 +59,9 @@ const Homepage = () => {
                   amount={item.price}
                   description={item.description}
                 />
-              </Link>
             </div>
           ))}
+      </div>
       </div>
       <Footer/>
     </div>
