@@ -21,16 +21,18 @@
 }
 
 .banner_content > h2 {
-  font-size: 40px;
+  font-size: 80px;
 }
 
 .banner_content > h5 {
+  font-size: 20px;
   width: 50vh;
   padding-bottom: 10px;
 }
 
 .banner_content button {
   background-color: #f2f2f2;
+  margin-top: 10px;
   padding: 10px;
   border: 0;
   border-radius: 8px;
