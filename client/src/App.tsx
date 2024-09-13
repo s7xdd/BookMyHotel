@@ -5,6 +5,7 @@ import Productpage from "./pages/Productpage";
 import Uniquepage from "./pages/Uniquepage";
 import Layout from "./components/Layout";
 import Loginpage from "./pages/Loginpage";
+import Signuppage from "./pages/Signuppage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/Unique stays" Component={Uniquepage} />
             <Route path="/rooms/:product" Component={Productpage} />
             <Route path="/login" Component={Loginpage}/>
+            <Route path="/signup" Component={Signuppage}/>
           </Routes>
         </Router>
       </Layout>

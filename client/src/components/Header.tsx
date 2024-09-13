@@ -19,10 +19,10 @@ const Header = () => {
             />
         <div className="header_icon">
           <div style={{ display: "flex", gap: "25px" }}>
-            <Link to={'/login'}>
+            <Link to={'/login'} target="_parent">
               <h3>Login</h3>
             </Link>
-            <Link to={'/signup'}>
+            <Link to={'/signup'} target="_parent">
               <h3>Signup</h3>
             </Link>
           </div>
