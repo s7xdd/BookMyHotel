@@ -6,15 +6,17 @@ const Header = () => {
   return (
     <div className="header">
       <span>
-        <div className="logo">
-          <IoLogoDribbble size={40} />
-          <h2 className="logo_text">BookMyHotel</h2>
-        </div>
-        <input
-          type="text"
-          placeholder="Start your search"
-          className="header_text"
-        />
+        <Link to={'/'} target="_parent">
+          <div className="logo">
+            <IoLogoDribbble size={40} />
+            <h2 className="logo_text">BookMyHotel</h2>
+          </div>
+        </Link>
+          <input
+            type="text"
+            placeholder="Start your search"
+            className="header_text"
+            />
         <div className="header_icon">
           <div style={{ display: "flex", gap: "25px" }}>
             <Link to={'/login'}>

@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import "../styles/productpage.css";
 import { Resultcontent } from "../data/Maincontents";
 import { useParams } from "react-router-dom";
-import Nav from "../components/Nav";
-import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 
 const Productpage = () => {

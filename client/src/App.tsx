@@ -1,22 +1,26 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Homepage from './pages/Homepage'
-import Productpage from './pages/Productpage'
-import Uniquepage from './pages/Uniquepage'
-
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import Productpage from "./pages/Productpage";
+import Uniquepage from "./pages/Uniquepage";
+import Layout from "./components/Layout";
+import Loginpage from "./pages/Loginpage";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path='/' Component={Homepage}/>
-          <Route path='/Unique stays' Component={Uniquepage}/>
-          <Route path='/rooms/:product' Component={Productpage}/>
-        </Routes>
-      </Router>
+      <Layout>
+        <Router>
+          <Routes>
+            <Route path="/" Component={Homepage} />
+            <Route path="/Unique stays" Component={Uniquepage} />
+            <Route path="/rooms/:product" Component={Productpage} />
+            <Route path="/login" Component={Loginpage}/>
+          </Routes>
+        </Router>
+      </Layout>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
