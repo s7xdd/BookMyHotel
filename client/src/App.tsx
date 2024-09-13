@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path='/' Component={Homepage}/>
           <Route path='/Unique stays' Component={Uniquepage}/>
-          <Route path='/:title' Component={Productpage}/>
+          <Route path='/rooms/:product' Component={Productpage}/>
         </Routes>
       </Router>
     </div>

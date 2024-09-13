@@ -12,7 +12,7 @@ const Homepage = () => {
       <div className="home_cont">
         {Maincontents &&
           Maincontents.map((item) => (
-            <Link to={`/${item.title}`}>
+            <Link to={`/${item.title}`} target="_parent">
             <div key={item.id}>
               <Contents
                 id={item.id}
@@ -51,15 +51,17 @@ const Homepage = () => {
       <div className="home_cont">
         {Content &&
           Content.map((item) => (
-            <div key={item.id}>
-                <Contents
-                  id={item.id}
-                  img={item.img}
-                  title={item.title}
-                  amount={item.price}
-                  description={item.description}
-                />
-            </div>
+            <Link to={`/rooms/${item.title}`} target="_parent">
+              <div key={item.id}>
+                  <Contents
+                    id={item.id}
+                    img={item.img}
+                    title={item.title}
+                    amount={item.price}
+                    description={item.description}
+                  />
+              </div>
+            </Link>
           ))}
       </div>
       </div>

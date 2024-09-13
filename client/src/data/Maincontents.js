@@ -159,35 +159,60 @@ export const Resultcontent = [
   export const Content = [
     {
       id: 0,
+      rating: "4.44(192)",
       img: "public/assets/card_1.jpg",
-      styles: "bigcontents_list1",
-      title: "Bedroom  ",
-      price: "$100/night",
-      description: "Awesome residential streets just a few blocks from dining",
+      styles: "bigcontents__list1",
+      title: "Sanitized 1 Bedroom",
+      type: "Entire apartment",
+      location: "New York",
+      host: "Mike",
+      amenities: "Wifi · Air condition · kitchen",
+      smalldescription: "3 guests · 1 bedroom · 1 bed · 1 bath",
+      price: "$100",
+      description:
+        "Awesome residential streets just a few blocks from dining"
     },
     {
       id: 1,
       img: "public/assets/card_2.jpg",
-      title: "full Home",
-      price: "$150/night",
-      description: "Hello Welcome to NJ. Here is a vibrating neighborhood ",
+      rating: "4.75(102)",
+      title: "Spacious 2 Bedroom.",
+      type: "Entire apartment",
+      location: "New Jersey",
+      host: "Abod",
+      amenities: "Wifi · Washer · kitchen",
+      smalldescription: "4 guests · 2 bedrooms · 0 beds · 1 bath",
+      price: "$150",
+      description:
+        "Hello Welcome to NJ. Here is a vibrating neighborhood ",
     },
     {
-      id: 5,
-      img: "public/assets/card_3.jpg",
-      title: "Square Studio",
-      styles: "bigcontents_list3",
-      price: "$190/night",
+      id: 2,
+      img: "public/assets/result-card_3.jpg",
+      rating: "New",
+      title: "Furnished luxury rooms!",
+      type: "Private room",
+      location: "Florida",
+      host: "Micheal",
+      amenities: "Wifi · Washer · kitchen",
+      smalldescription: "1 guest · 1 bedroom · 1 bed · 1 shared bath",
+      price: "$80",
       description:
         "Hell's kitchen is THE center of the entire city. Some of the best",
     },
     {
       id: 3,
       img: "public/assets/card_4.jpg",
-      styles: "bigcontents_list4",
-      title: "Hotel Suit",
-      price: "$92/night",
-      description: "Our Texas hotel offers the traditional comforts of home ",
-    },
+      rating: "4.15(35)",
+      title: "Luxury King Room & Suit",
+      type: "hotel Room",
+      location: "New Jersey",
+      host: "Abod Mike",
+      amenities: "Wifi · Washer · iron",
+      smalldescription: "2 guests · 1 bedroom · 1 bed · 1 private bath",
+      price: "$92",
+      description:
+        "Our Texas hotel offers the traditional comforts of home ",
+    }
   ];
-  
+
