@@ -188,7 +188,7 @@ export const Resultcontent = [
     },
     {
       id: 2,
-      img: "public/assets/result-card_3.jpg",
+      img: "public/assets/card_2.jpg",
       rating: "New",
       title: "Furnished luxury rooms!",
       type: "Private room",

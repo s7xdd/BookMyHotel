@@ -1,0 +1,76 @@
+.top_bar_main{
+    h1{
+        margin: 50px 90px 20px 90px;
+    }
+    .top_bar{
+        margin-top: 30px;
+        margin-bottom: 20px;
+        padding: 10px 90px 0px 90px;
+        display: flex;
+        justify-content: space-between;
+
+        button{
+            border-radius: 10px;
+            padding: 5px 10px 5px 10px;
+        }
+
+        input{
+            padding: 5px 10px 5px 10px;
+        }
+    }
+}
+
+
+.listing_outer{
+    padding: 20px 90px 20px 90px;
+    display: grid;
+    h1{
+        margin-bottom: 40px;
+    }
+
+}
+
+.listing_main{
+    display: grid;
+    grid-template-columns: 350px 350px 350px;
+}
+
+.listing{
+    background-color: red;
+    display: flex;
+    gap: 300px;
+   
+    
+}
+
+
+.ad{
+    border-bottom: 1px solid rgb(190, 190, 190);
+    display: flex;
+    gap: 100px;
+    padding: 20px;
+    align-items: center;
+    .date{
+        width: 110px;
+    }
+}
+
+.ad_inner{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    .buttons{
+        display: flex;
+        gap: 20px;
+    }
+    align-items: center;
+
+    button{
+        padding: 5px 30px 5px 30px;
+        height: 40px;
+        background-color: white;
+        border-radius: 10px;
+    }
+}
+
