@@ -7,7 +7,7 @@ const Loginpage = () => {
   return (
     <div className='nav'>
         <Header/>
-    <div className='login_main'>
+    <div className='login_main container'>
         <div className='login_inner'>
             <h1>Login</h1>
             <div style={{display: 'flex', flexDirection: 'column', width: '290px', gap: '20px'}}>

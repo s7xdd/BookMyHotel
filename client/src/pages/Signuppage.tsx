@@ -6,7 +6,7 @@ const Signuppage = () => {
   return (
     <div className='nav'>
         <Header/>
-    <div className='signup_main'>
+    <div className='signup_main container'>
         <div className='signup_inner'>
             <h1>Sign up</h1>
             <div style={{display: 'flex', flexDirection: 'column', width: '290px', gap: '20px'}}>

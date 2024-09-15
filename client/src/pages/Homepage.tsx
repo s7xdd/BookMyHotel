@@ -1,6 +1,5 @@
 import Banner from "../components/Banner";
 import Contents from "../components/Contents";
-import Footer from "../components/Footer";
 import { Content, Maincontents, Bigcontents } from "../data/Maincontents";
 import "../styles/contents.css";
 import { Link } from "react-router-dom";

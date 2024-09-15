@@ -21,7 +21,7 @@ const Productpage = () => {
   return (
     <div className="main">
       <div className="nav"><Header/></div>
-      <div className="inner_main">
+      <div className="product_page inner_main">
         {items && (
           <div className="items">
             <img

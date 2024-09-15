@@ -12,7 +12,7 @@ const Banner = () => {
                 Settle in somewhere new. Discover new places to live, work, have fun
                 or relax.
             </h5>
-            <Link to={'/result'}>
+            <Link to={'/explore'}>
                 <button>Explore Nearby</button>
             </Link>
         </div>
