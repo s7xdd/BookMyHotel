@@ -61,18 +61,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.put("/profile", (req,res) => {
-    const { token } = req.cookies;
-  try {
-    jwt.verify(token, process.env.SECRET, {}, (err, info) => {
-      if (err) throw err;
-      
 
-    });
-  } catch (error) {
-    res.status(400).json(error);
-  }
-})
 
 
 app.post("/login", async (req, res) => {
@@ -100,6 +89,71 @@ app.post("/login", async (req, res) => {
     res.status(400).json({ message: "Failed" });
   }
 });
+
+app.get("/user/profile", (req, res) => {
+    const { token } = req.cookies;
+    try {
+      jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
+        if (err) throw err;
+        const userDoc = await UserModel.findOne({ username: info.username });
+        res.status(200).json({
+            id: userDoc._id,
+            username : userDoc.username,
+            firstname: userDoc.firstname,
+            email: userDoc.email,
+            surname: userDoc.surname,
+            phone: userDoc.phone,
+            address1: userDoc.address1,
+            address2: userDoc.address2,
+            postcode: userDoc.postcode,
+            state: userDoc.state,
+            area: userDoc.area,
+            country: userDoc.country,
+        })
+      });
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  });
+
+  app.put("/user/profile", async (req,res) => {
+    const { token } = req.cookies;
+
+    const { 
+        firstname,
+        surname,
+        phone,
+        address1,
+        address2,
+        postcode,
+        state,
+        area,
+        country} = req.body
+
+   
+  try {
+    jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
+      if (err) throw err;
+      const userDoc = await UserModel.findOne({ username: info.username });
+      
+      userDoc.firstname = firstname;
+      userDoc.surname = surname;
+      userDoc.phone = phone;
+      userDoc.address1 = address1;
+      userDoc.address2 = address2;
+      userDoc.postcode = postcode;
+      userDoc.state = state;
+      userDoc.area = area;
+      userDoc.country = country;
+      
+      await userDoc.save();
+
+        res.json(userDoc);
+    });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+})
 
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
