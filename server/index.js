@@ -46,36 +46,208 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post('/login', async (req,res) => {
-    const {username, password} = req.body;
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const userDoc = await UserModel.findOne({ username: username });
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+    if (passOk) {
+      //logged in
+      jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+        if (err) throw err;
+        res
+          .cookie("token", token, { withCredentials: true, httpOnly: false })
+          .json({
+            id: userDoc._id,
+            username,
+          });
+      });
+    } else {
+      //not logged in
+      res.status(400).json({ message: "Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: "Failed" });
+  }
+});
+
+app.get("/profile", (req, res) => {
+  const { token } = req.cookies;
+
+  try {
+    jwt.verify(token, secret, {}, (err, info) => {
+      if (err) throw err;
+      res.json(info);
+    });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
+app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
+  try {
+    const { originalname, path } = req.file;
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    const newPath = path + "." + ext;
+    fs.renameSync(path, newPath);
+
+    const { token } = req.cookies;
+
+    jwt.verify(token, secret, {}, async (err, info) => {
+      if (err) throw err;
+      const {
+        title,
+        img,
+        content,
+        location,
+        amenities,
+        price,
+        smalldescription,
+        description,
+        host
+      } = req.body;
+      const postDoc = await PostModel.create({
+        title,
+        img: newPath,
+        content,
+        location,
+        amenities,
+        price,
+        smalldescription,
+        description,
+        host: info.id,
+      });
+      res.json(postDoc);
+    });
+  } catch (error) {
+    res.status(400).json({ msg: "Error" });
+  }
+});
+
+app.put('/rooms/:id', uploadMiddleware.single('file'), async(req,res) => {
+   
     try {
-        const userDoc = await UserModel.findOne({username: username})
-        const passOk = bcrypt.compareSync(password, userDoc.password)
-        if(passOk){
-            //logged in
-            jwt.sign({username,id:userDoc._id}, secret, {}, (err,token) => {
-                if (err) throw err;
-                res.cookie('token', token, { withCredentials: true, httpOnly: false}).json({
-                    id:userDoc._id,
-                    username,
-                })
-            })
+
+        let newPath = null;
+
+    if(req.file){
+        const {originalname,path} = req.file;
+        const parts = originalname.split('.');
+        const ext = parts[parts.length-1]
+        newPath = path + '.' + ext
+        fs.renameSync(path, newPath)
+    }
+
+    const {token} = req.cookies;
+
+    jwt.verify(token, secret, {}, async (err,info) => {
+        if(err) throw err;
+        const{id, 
+            title,
+            img,
+            content,
+            location,
+            amenities,
+            price,
+            smalldescription,
+            description
+        } = req.body;
+        const postDoc = await PostModel.findById(id);
+
+        const isHost = postDoc.host == info.id
+        
+        if(!isHost){
+            return res.status(400).json('You are not the host')
         }
-        else {
-            //not logged in
-            res.status(400).json({message: "Failed"})
+
+        postDoc.title = title;
+        postDoc.content = content;
+        postDoc.description = description;
+        postDoc.location = location;
+        postDoc.amenities = amenities;
+        postDoc.price = price;
+        postDoc.smalldescription = smalldescription;
+        postDoc.img = newPath ? newPath : postDoc.img
+
+        await postDoc.save();
+
+        res.json(postDoc);
+    })       
+
+    } catch (error) {
+        console.log(error)  
+    }
+    
+})
+
+app.get('/home/rooms', async (req,res) => {
+    const posts = await PostModel.find().populate('host', 'username').sort({createdAt: -1}).limit(8);
+    res.json(posts);
+})
+
+app.get('/rooms', async (req,res) => {
+    const posts = await PostModel.find().populate('host', 'username');
+    res.json(posts);
+})
+
+app.get('/rooms/:id', async (req, res) => {
+    const {id} = req.params;
+    const post = await PostModel.findOne({_id: id}).populate('host', 'username')
+    res.json(post)
+})
+
+app.get('/rooms/search/:title', async (req,res) => {
+    const {title} = req.params;
+    try {
+        const post = await PostModel.find({
+            $or: [
+                { title: { $regex: title, $options: 'i' } },
+                { place: { $regex: title, $options: 'i' } }
+              ]
+        })
+        res.json(post)
+        if(!post){
+            res.status(400).json({msg: 'Not found'})
         }
     } catch (error) {
-        console.log(error)
-        res.status(400).json({message: "Failed"})
+        res.status(400).json({msg: 'Error'})
     }
-   
 })
+
+app.delete('/post/:id', async (req,res) => {
+    const {token} = req.cookies;
+    try {
+        jwt.verify(token, secret, {}, async (err,info) => {
+            if(err) throw err;
+            const {id} = req.params;
+            const postDoc = await PostModel.findById(id);
+            if(postDoc){
+                const isHost = postDoc.host == info.id
+                if(!isAuthor){
+                    return res.status(400).json('You are not the author')
+                }
+                await postDoc.deleteOne({_id: id});
+            }
+            res.status(200).json({msg: 'Success'});
+        })       
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({msg: 'error'})
+    }
+})
+
+
+
+app.post("/logout", (req, res) => {
+  res.cookie("token", "").json("ok");
+});
 
 app.get("/", (req, res) => {
   res.send(200).json({ msg: "Hello world" });
 });
 
 app.listen(process.env.PORT, (req, res) => {
-  console.log("Listening");
+  console.log(`Listening on port ${process.env.PORT}`);
 });
