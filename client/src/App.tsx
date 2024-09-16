@@ -1,16 +1,17 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from 'react'
 import Homepage from "./pages/Homepage";
-import Productpage from "./pages/Productpage";
-import Uniquepage from "./pages/Uniquepage";
+const Productpage = lazy(() => import("./pages/Productpage"));
+const Uniquepage = lazy(() => import("./pages/Uniquepage"));
 import Layout from "./components/Layout";
-import Loginpage from "./pages/Loginpage";
-import Signuppage from "./pages/Signuppage";
-import Allproducts from "./pages/Allproducts";
-import Profilepage from "./pages/Profilepage";
-import Listingspage from "./pages/Listingspage";
+const Loginpage = lazy(() => import("./pages/Loginpage"));
+const Signuppage = lazy(() => import("./pages/Signuppage"));
+const Allproducts = lazy(() => import("./pages/Allproducts"));
+const Profilepage = lazy(() => import("./pages/Profilepage"));
+const Listingspage = lazy(() => import("./pages/Listingspage"));
 import { UserContextProvider } from "./UserContext";
-import CreateListing from "./pages/Newlistingpage";
+const CreateListing = lazy(() => import("./pages/Newlistingpage"));
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <UserContextProvider>
         <Layout>
           <Router>
+            <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/" Component={Homepage} />
               <Route path="/Unique stays" Component={Uniquepage} />
@@ -29,6 +31,7 @@ function App() {
               <Route path="/listings" Component={Listingspage} />
               <Route path="newlisting" Component={CreateListing}/>
             </Routes>
+            </Suspense>
           </Router>
         </Layout>
       </UserContextProvider>

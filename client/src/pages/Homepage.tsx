@@ -38,7 +38,7 @@ const Homepage = () => {
           Join live, interactive performances and conversations with people from
           Broadway and beyond. Without leaving home.
         </p>
-        <div className="home_cont">
+        <div className="bigcontents home_cont ">
           {Bigcontents &&
             Bigcontents.map((item) => (
               <div key={item.id}>

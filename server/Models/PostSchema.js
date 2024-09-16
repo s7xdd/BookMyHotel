@@ -9,6 +9,7 @@ const PostSchema = new mongoose.Schema({
     price: Number,
     smalldescription: String,
     description: String,
+    type: String,
     host: {type:mongoose.Schema.Types.ObjectId, ref:'UserHotel'}
 }, {
     timestamps: true

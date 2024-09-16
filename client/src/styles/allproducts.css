@@ -1,3 +1,10 @@
+div.allproducts{
+    .show_all{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
 div.allproducts h1{
     margin-left: 80px;
     margin-top: 40px;

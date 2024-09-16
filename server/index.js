@@ -166,42 +166,9 @@ app.get("/profile", (req, res) => {
   }
 });
 
-//Admin login
-app.post('/admin/login', async (req,res) => {
-    const { username, password } = req.body;
 
-        const userDoc = await UserModel.findOne({ username: username });
-        const passOk = bcrypt.compareSync(password, userDoc.password);
-        if (passOk) {
-          //logged in
-          if (userDoc.isAdmin){
-            jwt.sign({ username, id: userDoc._id }, process.env.SECRET, {}, (err, token) => {
-                if (err) throw err;
-                res
-                  .cookie("token", token, { withCredentials: true, httpOnly: false })
-                  .json({
-                    id: userDoc._id,
-                    username,
-                  });
-              });
-          } else {
-            res.status(400).json({msg: "you dont have permission to access this page"})
-          }
-          
-        } else {
-          //not logged in
-          res.status(400).json({ message: "Wrong credentials" });
-        }
 
-})
 
-//Admin dashboard (All posts)
-app.post('/admin/dashboard', async (req,res) => {
-    jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
-
-    })
-
-})
 
 app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   try {
@@ -321,7 +288,7 @@ app.get('/mylistings', async (req,res) => {
 })
 
 app.get('/home/rooms', async (req,res) => {
-    const posts = await PostModel.find().populate('host', 'username').limit(6);
+    const posts = await PostModel.find().populate('host', 'username').sort({createdAt: -1}).limit(3);
     res.json(posts);
 })
 
@@ -381,6 +348,43 @@ app.delete('/post/:id', async (req,res) => {
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
+
+//Admin dashboard (All posts)
+app.post('/admin/dashboard', async (req,res) => {
+  jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
+
+  })
+
+})
+
+//Admin login
+app.post('/admin/login', async (req,res) => {
+    const { username, password } = req.body;
+
+        const userDoc = await UserModel.findOne({ username: username });
+        const passOk = bcrypt.compareSync(password, userDoc.password);
+        if (passOk) {
+          //logged in
+          if (userDoc.isAdmin){
+            jwt.sign({ username, id: userDoc._id }, process.env.SECRET, {}, (err, token) => {
+                if (err) throw err;
+                res
+                  .cookie("token", token, { withCredentials: true, httpOnly: false })
+                  .json({
+                    id: userDoc._id,
+                    username,
+                  });
+              });
+          } else {
+            res.status(400).json({msg: "you dont have permission to access this page"})
+          }
+          
+        } else {
+          //not logged in
+          res.status(400).json({ message: "Wrong credentials" });
+        }
+
+})
 
 app.get("/", (req, res) => {
   res.send(200).json({ msg: "Hello world" });

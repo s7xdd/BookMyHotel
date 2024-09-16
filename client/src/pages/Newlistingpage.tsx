@@ -12,6 +12,7 @@ const CreateListing = () => {
   const [price, setPrice] = useState("");
   const [smalldescription, setSmalldescription] = useState("");
   const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
   const { userInfo } = useContext(UserContext);
@@ -19,7 +20,16 @@ const CreateListing = () => {
   async function createNewPost(ev) {
     ev.preventDefault();
 
-    if ((title.length < 1) || (content.length < 1) || (location.length < 1) || (amenities.length < 1) || (price.length < 1) || (smalldescription.length < 1) || (description.length < 1) || (files.length < 1)) {
+    if (
+      title.length < 1 ||
+      content.length < 1 ||
+      location.length < 1 ||
+      amenities.length < 1 ||
+      price.length < 1 ||
+      smalldescription.length < 1 ||
+      description.length < 1 ||
+      files.length < 1
+    ) {
       alert("All fields are necessary");
     } else {
       const data = new FormData();
@@ -47,8 +57,8 @@ const CreateListing = () => {
     }
   }
 
-  if(redirect){
-    return <Navigate to={'/listings'}/>
+  if (redirect) {
+    return <Navigate to={"/listings"} />;
   }
 
   if (!userInfo.username) {
@@ -57,67 +67,86 @@ const CreateListing = () => {
 
   return (
     <div>
-        <Header/>
-    <div className="create-post-cont">
-        
-      <div className="create-post-inner">
-        <h1>Create New Listing</h1>
-        <form onSubmit={createNewPost}>
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+      <Header />
+      <div className="create-post-cont">
+        <div className="create-post-inner">
+          <h1>Create New Listing</h1>
+          <form onSubmit={createNewPost}>
+            <input
+              type="text"
+              placeholder="Title"
+              maxLength={45}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
-          <input
-            type="text"
-            placeholder="Content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            />
-
-          <input
-            type="text"
-            placeholder="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            <input
+              type="text"
+              placeholder="Content"
+              maxLength={35}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             />
 
-          <input
-            type="text"
-            placeholder="amenities"
-            value={amenities}
-            onChange={(e) => setAmenities(e.target.value)}
+            <input
+              type="text"
+              placeholder="location"
+              maxLength={30}
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
             />
 
-          <input
-            type="text"
-            placeholder="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            <input
+              type="text"
+              placeholder="amenities"
+              value={amenities}
+              maxLength={20}
+              onChange={(e) => setAmenities(e.target.value)}
             />
 
-          <input
-            type="text"
-            placeholder="Small description"
-            value={smalldescription}
-            onChange={(e) => setSmalldescription(e.target.value)}
+            <input
+              type="text"
+              placeholder="price"
+              maxLength={8}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
 
-          <input
-            type="text"
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            <input
+              type="text"
+              placeholder="Small description"
+              value={smalldescription}
+              maxLength={50}
+              style={{height: "80px"}}
+              onChange={(e) => setSmalldescription(e.target.value)}
             />
 
-          <input type="file" onChange={(e) => setFiles(e.target.files)} />
+            <input
+              type="text"
+              placeholder="Description"
+              value={description}
+              maxLength={700}
+              style={{ height: "150px" }}
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-          <button className="create-btn btn btn-primary">Create Post</button>
-        </form>
+            <input type="file" onChange={(e) => setFiles(e.target.files)} />
+            <div className="select">
+              <label>Property type:</label>
+              <select value={type} onChange={(e) => setType(e.target.value)}>
+                <option value="" disabled hidden>
+                  Select an option
+                </option>
+                <option value="unique">Unique</option>
+                <option value="experience">Experience</option>
+                <option value="entirehome">Entire Home</option>
+              </select>
+            </div>
+
+            <button className="create-btn btn btn-primary">Create Post</button>
+          </form>
+        </div>
       </div>
     </div>
-            </div>
   );
 };
 
