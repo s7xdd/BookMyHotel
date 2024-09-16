@@ -16,8 +16,13 @@ const fs = require("fs");
 const PORT = process.env.PORT || 4000;
 var salt = bcrypt.genSaltSync(10);
 
+var corsOptions = {
+    origin: 'http://localhost:5173',
+    credentials: true
+}
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser())
 
@@ -28,14 +33,22 @@ mongoose
   .then((response) => console.log("Mongo connection success"))
   .then((error) => console.log(error));
 
+
 app.post("/register", async (req, res) => {
-  const { username, password, isAdmin } = req.body;
+  const { email, username, password, isAdmin } = req.body;
   try {
-    const checkUser = await UserModel.findOne({ username });
+    const checkUser = await UserModel.findOne(
+        {$or: [
+            {email: email},
+            {username: username}
+        ]
+    });
+
     if (checkUser) {
       res.status(400).json({ message: "User already exists" });
     } else {
       const response = await UserModel.create({
+        email,
         username,
         password: bcrypt.hashSync(password, salt),
         isAdmin
@@ -47,6 +60,20 @@ app.post("/register", async (req, res) => {
     res.status(400).json({ message: "User not created" });
   }
 });
+
+app.put("/profile", (req,res) => {
+    const { token } = req.cookies;
+  try {
+    jwt.verify(token, process.env.SECRET, {}, (err, info) => {
+      if (err) throw err;
+      
+
+    });
+  } catch (error) {
+    res.status(400).json(error);
+  }
+})
+
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -118,7 +145,7 @@ app.post('/admin/login', async (req,res) => {
 //Admin dashboard (All posts)
 app.post('/admin/dashboard', async (req,res) => {
     jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
-        
+
     })
 
 })
