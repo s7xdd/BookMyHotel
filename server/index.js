@@ -308,7 +308,6 @@ app.get('/mylistings', async (req,res) => {
     try {
         jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
         if (err) throw err;
-
         const post = await PostModel.find({host: info.id})
         res.json(post)
         if(!post){

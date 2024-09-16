@@ -67,6 +67,10 @@
     }
     align-items: center;
 
+    img{
+        border-radius: 15px;
+    }
+
     button{
         padding: 5px 30px 5px 30px;
         height: 40px;

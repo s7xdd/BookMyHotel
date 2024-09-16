@@ -5,14 +5,18 @@ import Listings from '../components/Listings';
 import { Content } from '../data/Maincontents'
 import { UserContext } from '../UserContext';
 import { Link, Navigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Listingspage = () => {
-  const [listings, setListings] = useState(Content);
+  const [listings, setListings] = useState([]);
   const {userInfo} = useContext(UserContext);
 
   useEffect(() => {
-    
+    axios.get(`${import.meta.env.VITE_URL}/mylistings`, {withCredentials: true}).then((response) => {
+      setListings(response.data)
+      console.log(listings)
+    })
   },[])
 
   const handleEdit = (id) => {
@@ -43,7 +47,7 @@ const Listingspage = () => {
           </div>
       </div>
       {listings && listings.map((item) => (
-        <Listings title={item.title} price={item.price} img={item.img} location={item.location}/>
+        <Listings title={item.title} price={item.price} img={item.img} location={item.location} date={item.createdAt}/>
       ))}
     </div>
   );
