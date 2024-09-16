@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
 import "../styles/productpage.css";
-import { Resultcontent } from "../data/Maincontents";
 import { useParams } from "react-router-dom";
 import Header from "../components/Header";
+import axios from "axios";
 
 const Productpage = () => {
   const { product } = useParams();
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState();
 
   useEffect(() => {
-    Resultcontent.forEach((item) => {
-      const { title } = item;
-      if (title == product) {
-        setItems(item);
-        console.log(item.img);
-      }
-    });
+      axios.get(`${import.meta.env.VITE_URL}/rooms/${product}`).then((response) => {
+        setItems(response.data)
+        console.log(response.data)
+      })
+
   }, []);
 
   return (
@@ -44,14 +42,14 @@ const Productpage = () => {
               </div>
               <button className={`items__heart`}></button>
               <img
-                src={items.img}
+                src={`${import.meta.env.VITE_URL}/${items.img}`}
                 width="95%"
                 height="460vh"
                 className="items__img"
                 alt="img"
               />
               <h2>
-                {items.type} hosted by {items.host}
+                {items.type} hosted by {items.host.username}
               </h2>
               <h4>{items.smalldescription}</h4>
               <div className="items__wind" style={{ cursor: "pointer" }}>
@@ -130,7 +128,7 @@ const Productpage = () => {
                 <h3>Outstanding hospitality</h3>
               </div>
               <h4 style={{ paddingLeft: "41px", width: "70%" }}>
-                Few guests complimented {items.host} for outstanding
+                Few guests complimented {items.host.username} for outstanding
                 hospitality..
               </h4>
               <br />

@@ -326,13 +326,13 @@ app.get('/home/rooms', async (req,res) => {
 })
 
 app.get('/rooms', async (req,res) => {
-    const posts = await PostModel.find().populate('host', 'username');
+    const posts = await PostModel.find();
     res.json(posts);
 })
 
 app.get('/rooms/:id', async (req, res) => {
     const {id} = req.params;
-    const post = await PostModel.findOne({_id: id}).populate('host', 'username')
+    const post = await PostModel.findOne({title: id}).populate('host', 'username')
     res.json(post)
 })
 
