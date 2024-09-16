@@ -8,7 +8,7 @@ const CreateListing = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [location, setLocation] = useState("");
-  const [amenities, setAmenities] = useState("");
+  const [amenities, setAmenities] = useState([]);
   const [price, setPrice] = useState("");
   const [smalldescription, setSmalldescription] = useState("");
   const [description, setDescription] = useState("");
@@ -59,6 +59,19 @@ const CreateListing = () => {
     }
   }
 
+  const handleChange = (e) => {
+    const { value, checked } = e.target;
+
+    setAmenities((prevSelected) => {
+      if (checked) {
+        return [...prevSelected, value];
+      } else {
+        return prevSelected.filter((option) => option !== value);
+      }
+    });
+    console.log(amenities);
+  };
+
   if (redirect) {
     return <Navigate to={"/listings"} />;
   }
@@ -97,13 +110,55 @@ const CreateListing = () => {
               onChange={(e) => setLocation(e.target.value)}
             />
 
-            <input
-              type="text"
-              placeholder="amenities"
-              value={amenities}
-              maxLength={20}
-              onChange={(e) => setAmenities(e.target.value)}
-            />
+            <h5>Select Amenities</h5>
+            <div className="amenities">
+              <div className="multiselect">
+                <h6>Wifi</h6>
+                <input
+                  type="checkbox"
+                  value="wifi"
+                  checked={amenities.includes("wifi")}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="multiselect">
+                <h6>Kitchen</h6>
+                <input
+                  type="checkbox"
+                  value="kitchen"
+                  checked={amenities.includes("kitchen")}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="multiselect">
+                <h6>Parking</h6>
+                <input
+                  type="checkbox"
+                  value="parking"
+                  checked={amenities.includes("parking")}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="multiselect">
+                <h6>Hot Tub</h6>
+                <input
+                  type="checkbox"
+                  value="hottub"
+                  checked={amenities.includes("hottub")}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="multiselect">
+                <h6>Air Conditioning</h6>
+                <input
+                  type="checkbox"
+                  value="aircondtioning"
+                  checked={amenities.includes("aircondtioning")}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
 
             <input
               type="text"
@@ -118,7 +173,7 @@ const CreateListing = () => {
               placeholder="Small description"
               value={smalldescription}
               maxLength={50}
-              style={{height: "80px"}}
+              style={{ height: "80px" }}
               onChange={(e) => setSmalldescription(e.target.value)}
             />
 
