@@ -224,6 +224,7 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
         smalldescription,
         description,
       } = req.body;
+
       const postDoc = await PostModel.create({
         title,
         img: newPath,
@@ -235,8 +236,11 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
         description,
         host: info.id,
       });
-      res.json(postDoc);
+
+      const newDocs = await PostModel.find({host: info.id})
+      res.json(newDocs);
     });
+    
   } catch (error) {
     res.status(400).json({ msg: "Error" });
   }

@@ -8,6 +8,7 @@
         padding: 10px 90px 0px 90px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         button{
             border-radius: 10px;

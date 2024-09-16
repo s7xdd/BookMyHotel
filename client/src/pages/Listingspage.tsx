@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Listings from '../components/Listings';
 import { Content } from '../data/Maincontents'
 import { UserContext } from '../UserContext';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 
 const Listingspage = () => {
@@ -37,6 +37,9 @@ const Listingspage = () => {
             <span>Filter By</span>
             <button>View all(35)</button>
             <button>Active Ads</button>
+            <Link to={'/newlisting'}>
+              <button>Create new listing</button>
+            </Link>
           </div>
       </div>
       {listings && listings.map((item) => (
