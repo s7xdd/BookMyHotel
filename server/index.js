@@ -19,6 +19,7 @@ var salt = bcrypt.genSaltSync(10);
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser())
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
@@ -28,7 +29,7 @@ mongoose
   .then((error) => console.log(error));
 
 app.post("/register", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, isAdmin } = req.body;
   try {
     const checkUser = await UserModel.findOne({ username });
     if (checkUser) {
@@ -37,6 +38,7 @@ app.post("/register", async (req, res) => {
       const response = await UserModel.create({
         username,
         password: bcrypt.hashSync(password, salt),
+        isAdmin
       });
       res.status(200).json({ message: "User created successfully" });
     }
@@ -53,7 +55,7 @@ app.post("/login", async (req, res) => {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
       //logged in
-      jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+      jwt.sign({ username, id: userDoc._id }, process.env.SECRET, {}, (err, token) => {
         if (err) throw err;
         res
           .cookie("token", token, { withCredentials: true, httpOnly: false })
@@ -74,9 +76,8 @@ app.post("/login", async (req, res) => {
 
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
-
   try {
-    jwt.verify(token, secret, {}, (err, info) => {
+    jwt.verify(token, process.env.SECRET, {}, (err, info) => {
       if (err) throw err;
       res.json(info);
     });
@@ -84,6 +85,43 @@ app.get("/profile", (req, res) => {
     res.status(400).json(error);
   }
 });
+
+//Admin login
+app.post('/admin/login', async (req,res) => {
+    const { username, password } = req.body;
+
+        const userDoc = await UserModel.findOne({ username: username });
+        const passOk = bcrypt.compareSync(password, userDoc.password);
+        if (passOk) {
+          //logged in
+          if (userDoc.isAdmin){
+            jwt.sign({ username, id: userDoc._id }, process.env.SECRET, {}, (err, token) => {
+                if (err) throw err;
+                res
+                  .cookie("token", token, { withCredentials: true, httpOnly: false })
+                  .json({
+                    id: userDoc._id,
+                    username,
+                  });
+              });
+          } else {
+            res.status(400).json({msg: "you dont have permission to access this page"})
+          }
+          
+        } else {
+          //not logged in
+          res.status(400).json({ message: "Wrong credentials" });
+        }
+
+})
+
+//Admin dashboard (All posts)
+app.post('/admin/dashboard', async (req,res) => {
+    jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
+        
+    })
+
+})
 
 app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   try {
@@ -95,18 +133,16 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
 
     const { token } = req.cookies;
 
-    jwt.verify(token, secret, {}, async (err, info) => {
+    jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
       if (err) throw err;
       const {
         title,
-        img,
         content,
         location,
         amenities,
         price,
         smalldescription,
         description,
-        host
       } = req.body;
       const postDoc = await PostModel.create({
         title,
@@ -142,7 +178,7 @@ app.put('/rooms/:id', uploadMiddleware.single('file'), async(req,res) => {
 
     const {token} = req.cookies;
 
-    jwt.verify(token, secret, {}, async (err,info) => {
+    jwt.verify(token, process.env.SECRET, {}, async (err,info) => {
         if(err) throw err;
         const{id, 
             title,
@@ -182,6 +218,25 @@ app.put('/rooms/:id', uploadMiddleware.single('file'), async(req,res) => {
     
 })
 
+app.get('/mylistings', async (req,res) => {
+    const { token } = req.cookies;
+
+    try {
+        jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
+        if (err) throw err;
+
+        const post = await PostModel.find({host: info.id})
+        res.json(post)
+        if(!post){
+            res.status(400).json({msg: 'Not found'})
+        }
+
+        });
+    } catch (error) {
+        res.status(400).json(error);
+    }
+})
+
 app.get('/home/rooms', async (req,res) => {
     const posts = await PostModel.find().populate('host', 'username').sort({createdAt: -1}).limit(8);
     res.json(posts);
@@ -219,7 +274,7 @@ app.get('/rooms/search/:title', async (req,res) => {
 app.delete('/post/:id', async (req,res) => {
     const {token} = req.cookies;
     try {
-        jwt.verify(token, secret, {}, async (err,info) => {
+        jwt.verify(token, process.env.SECRET, {}, async (err,info) => {
             if(err) throw err;
             const {id} = req.params;
             const postDoc = await PostModel.findById(id);

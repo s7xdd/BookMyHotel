@@ -11,9 +11,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     }, 
-    realtor: {
+    isAdmin: {
         type: Boolean
-    },
+    }
 })
 
 const UserModel = mongoose.model('UserHotel', UserSchema)
