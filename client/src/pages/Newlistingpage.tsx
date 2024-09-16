@@ -28,6 +28,7 @@ const CreateListing = () => {
       price.length < 1 ||
       smalldescription.length < 1 ||
       description.length < 1 ||
+      type.length < 1 ||
       files.length < 1
     ) {
       alert("All fields are necessary");
@@ -40,6 +41,7 @@ const CreateListing = () => {
       data.set("price", price);
       data.set("smalldescription", smalldescription);
       data.set("description", description);
+      data.set("type", type);
       data.set("file", files[0]);
 
       const response = await fetch(`${import.meta.env.VITE_URL}/post`, {

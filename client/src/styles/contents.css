@@ -9,6 +9,32 @@
     margin: 0;
   }
 
+  .explore_button{
+    display: flex;
+    justify-content: center;
+  }
+
+  .explore_button button {
+    background-color: #f2f2f2;
+    margin-top: 10px;
+    padding: 20px 30px 20px 30px;
+    border: 0;
+    border-radius: 8px;
+    color: black;
+    cursor: pointer;
+    outline: 0;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .explore_button button:hover {
+    background-color: rgba(191, 191, 191, 0.9);
+  }
+  
+  .explore_button button:active {
+    transform: scale(0.98);
+  }
+
   .contents_list {
     margin: 50px 5px 50px 5px;
     padding-bottom: 15px;

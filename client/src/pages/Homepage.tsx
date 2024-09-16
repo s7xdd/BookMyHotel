@@ -72,6 +72,11 @@ const Homepage = () => {
             </Link>
           ))}
       </div>
+          <div className="explore_button">
+          <Link to={'/explore'}>
+                <button>Explore Nearby</button>
+            </Link>
+          </div>
       </div>
     </div>
   );
