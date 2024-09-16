@@ -1,10 +1,19 @@
+import { useEffect, useState } from "react";
 import Banner from "../components/Banner";
 import Contents from "../components/Contents";
-import { Content, Maincontents, Bigcontents } from "../data/Maincontents";
+import { Maincontents, Bigcontents } from "../data/Maincontents";
 import "../styles/contents.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Homepage = () => {
+  const[listings, setListings] = useState([])
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_URL}/home/rooms`).then((response) => {
+      setListings(response.data)
+      console.log(response.data)
+    })
+}, []);
   return (
     <div>
       <Banner />
@@ -47,17 +56,17 @@ const Homepage = () => {
       </div>
       <div className="homepage_experiences">
  
-      <div className="home_cont">
-        {Content &&
-          Content.map((item) => (
+      <div className="home_cont rooms">
+        {listings &&
+          listings.map((item) => (
             <Link to={`/rooms/${item.title}`} target="_parent">
               <div key={item.id}>
                   <Contents
                     id={item.id}
-                    img={item.img}
+                    img={`${import.meta.env.VITE_URL}/${item.img}`}
                     title={item.title}
                     amount={item.price}
-                    description={item.description}
+                    description={item.smalldescription}
                   />
               </div>
             </Link>

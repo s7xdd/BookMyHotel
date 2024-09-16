@@ -321,7 +321,7 @@ app.get('/mylistings', async (req,res) => {
 })
 
 app.get('/home/rooms', async (req,res) => {
-    const posts = await PostModel.find().populate('host', 'username').sort({createdAt: -1}).limit(8);
+    const posts = await PostModel.find().populate('host', 'username').limit(6);
     res.json(posts);
 })
 
