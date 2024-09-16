@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../styles/listingspage.css'
 import Header from '../components/Header';
 import Listings from '../components/Listings';
 import { Content } from '../data/Maincontents'
+import { UserContext } from '../UserContext';
+import { Navigate } from 'react-router-dom';
 
 
 const Listingspage = () => {
-const [listings, setListings] = useState(Content);
+  const [listings, setListings] = useState(Content);
+  const {userInfo} = useContext(UserContext);
+
+  useEffect(() => {
+    
+  },[])
 
   const handleEdit = (id) => {
     alert(`Edit listing ${id}`);
@@ -15,6 +22,10 @@ const [listings, setListings] = useState(Content);
   const handleDelete = (id) => {
     setListings(listings.filter(listing => listing.id !== id));
   };
+
+  if(!userInfo.username){
+    return <Navigate to={'/login'}/>
+  }
 
   return (
     <div>

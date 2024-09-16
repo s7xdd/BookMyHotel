@@ -19,6 +19,7 @@ const Profilepage = () => {
   const [email, setEmail] = useState('')
 
   useEffect(() => {
+   if(userInfo.username){
     fetch(`${import.meta.env.VITE_URL}/user/profile`, {
       credentials: "include"
     }).then((response) => {
@@ -37,6 +38,7 @@ const Profilepage = () => {
     }).catch((error) => {
       alert(error)
     })
+   }
   
   },[])  
 

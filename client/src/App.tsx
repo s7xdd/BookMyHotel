@@ -8,8 +8,9 @@ import Loginpage from "./pages/Loginpage";
 import Signuppage from "./pages/Signuppage";
 import Allproducts from "./pages/Allproducts";
 import Profilepage from "./pages/Profilepage";
-import Listings from "./pages/Listingspage";
+import Listingspage from "./pages/Listingspage";
 import { UserContextProvider } from "./UserContext";
+import CreateListing from "./pages/Newlistingpage";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
               <Route path="/login" Component={Loginpage} />
               <Route path="/signup" Component={Signuppage} />
               <Route path="/profile" Component={Profilepage} />
-              <Route path="/listings" Component={Listings} />
+              <Route path="/listings" Component={Listingspage} />
+              <Route path="newlisting" Component={CreateListing}/>
             </Routes>
           </Router>
         </Layout>

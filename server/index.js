@@ -129,7 +129,6 @@ app.get("/user/profile", (req, res) => {
         state,
         area,
         country} = req.body
-
    
   try {
     jwt.verify(token, process.env.SECRET, {}, async (err, info) => {
