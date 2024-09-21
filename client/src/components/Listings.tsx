@@ -15,7 +15,7 @@ const Listings = ({date, title, location, price, img}) => {
             </div>
             <div className="ad_inner">
               <Link to={`/rooms/${title}`}>
-              <img src={`${import.meta.env.VITE_URL}/${img}`} height={100} alt="image" />
+              <img src={`${import.meta.env.VITE_URL}/${img}`} alt="image" />
               </Link>
               <div>
                 <Link to={`/rooms/${title}`}>
@@ -23,7 +23,7 @@ const Listings = ({date, title, location, price, img}) => {
                   <span>{location}</span>
                 </Link>
               </div>
-              <h6>{price}</h6>
+              <h6>${price}</h6>
               <a>ACTIVE</a>
               <div className="buttons">
                 <button>Edit</button>

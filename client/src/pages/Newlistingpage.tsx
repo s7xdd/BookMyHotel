@@ -1,8 +1,16 @@
 import "../styles/Newlistingpage.css";
 import React, { useContext, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import Header from "../components/Header";
+import {
+  Button,
+  ButtonGroup,
+  Checkbox,
+  CheckboxGroup,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 
 const CreateListing = () => {
   const [title, setTitle] = useState("");
@@ -87,14 +95,15 @@ const CreateListing = () => {
         <div className="create-post-inner">
           <h1>Create New Listing</h1>
           <form onSubmit={createNewPost}>
-            <input
+            <Input
               type="text"
               placeholder="Title"
               maxLength={45}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              size="md"
             />
-            <input
+            <Input
               type="text"
               placeholder="Content"
               maxLength={35}
@@ -102,7 +111,7 @@ const CreateListing = () => {
               onChange={(e) => setContent(e.target.value)}
             />
 
-            <input
+            <Input
               type="text"
               placeholder="location"
               maxLength={30}
@@ -112,55 +121,62 @@ const CreateListing = () => {
 
             <h5>Select Amenities</h5>
             <div className="amenities">
-              <div className="multiselect">
-                <h6>Wifi</h6>
-                <input
-                  type="checkbox"
-                  value="wifi"
-                  checked={amenities.includes("wifi")}
-                  onChange={handleChange}
-                />
-              </div>
+              <CheckboxGroup>
+                <div className="multiselect">
+                  <Checkbox
+                    type="checkbox"
+                    value="wifi"
+                    checked={amenities.includes("wifi")}
+                    onChange={handleChange}
+                  >
+                    Wifi
+                  </Checkbox>
+                </div>
 
-              <div className="multiselect">
-                <h6>Kitchen</h6>
-                <input
-                  type="checkbox"
-                  value="kitchen"
-                  checked={amenities.includes("kitchen")}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="multiselect">
-                <h6>Parking</h6>
-                <input
-                  type="checkbox"
-                  value="parking"
-                  checked={amenities.includes("parking")}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="multiselect">
-                <h6>Hot Tub</h6>
-                <input
-                  type="checkbox"
-                  value="hottub"
-                  checked={amenities.includes("hottub")}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="multiselect">
-                <h6>Air Conditioning</h6>
-                <input
-                  type="checkbox"
-                  value="aircondtioning"
-                  checked={amenities.includes("aircondtioning")}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="multiselect">
+                  <Checkbox
+                    type="checkbox"
+                    value="kitchen"
+                    checked={amenities.includes("kitchen")}
+                    onChange={handleChange}
+                  >
+                    Kitchen
+                  </Checkbox>
+                </div>
+                <div className="multiselect">
+                  <Checkbox
+                    type="checkbox"
+                    value="parking"
+                    checked={amenities.includes("parking")}
+                    onChange={handleChange}
+                  >
+                    Parking
+                  </Checkbox>
+                </div>
+                <div className="multiselect">
+                  <Checkbox
+                    type="checkbox"
+                    value="hottub"
+                    checked={amenities.includes("hottub")}
+                    onChange={handleChange}
+                  >
+                    Hot Tub
+                  </Checkbox>
+                </div>
+                <div className="multiselect">
+                  <Checkbox
+                    type="checkbox"
+                    value="aircondtioning"
+                    checked={amenities.includes("aircondtioning")}
+                    onChange={handleChange}
+                  >
+                    Air Conditioning
+                  </Checkbox>
+                </div>
+              </CheckboxGroup>
             </div>
 
-            <input
+            <Input
               type="text"
               placeholder="price"
               maxLength={8}
@@ -168,7 +184,7 @@ const CreateListing = () => {
               onChange={(e) => setPrice(e.target.value)}
             />
 
-            <input
+            <Input
               type="text"
               placeholder="Small description"
               value={smalldescription}
@@ -177,7 +193,7 @@ const CreateListing = () => {
               onChange={(e) => setSmalldescription(e.target.value)}
             />
 
-            <input
+            <Input
               type="text"
               placeholder="Description"
               value={description}
@@ -186,7 +202,7 @@ const CreateListing = () => {
               onChange={(e) => setDescription(e.target.value)}
             />
 
-            <input type="file" onChange={(e) => setFiles(e.target.files)} />
+            <Input type="file" onChange={(e) => setFiles(e.target.files)} />
             <div className="select">
               <label>Property type:</label>
               <select value={type} onChange={(e) => setType(e.target.value)}>
@@ -198,8 +214,16 @@ const CreateListing = () => {
                 <option value="entirehome">Entire Home</option>
               </select>
             </div>
-
-            <button className="create-btn btn btn-primary">Create Post</button>
+            <div className="d-flex justify-content-center mt-4">
+              <ButtonGroup variant="outline" spacing="6">
+                <Button colorScheme="blue" type="submit">
+                  Save
+                </Button>
+                <Link to={'/listings'}>
+                  <Button>Cancel</Button>
+                </Link>
+              </ButtonGroup>
+            </div>
           </form>
         </div>
       </div>

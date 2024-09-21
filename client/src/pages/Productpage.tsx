@@ -37,7 +37,7 @@ const Productpage = () => {
                 </i>
                 <i>{items.location},United States</i>
                 <i style={{ color: "black", textDecoration: "none" }}>
-                  <i style={{ color: "#717171" }}>·</i> {items.price}
+                  <i style={{ color: "#717171" }}>·</i> ${items.price}
                 </i>
               </div>
               <button className={`items__heart`}></button>

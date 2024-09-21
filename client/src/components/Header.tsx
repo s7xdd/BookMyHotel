@@ -1,28 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../styles/header.css";
 import { IoLogoDribbble } from "react-icons/io";
 import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
+import { Input } from "@chakra-ui/react";
 
 const Header = () => {
   const { userInfo, setUserInfo } = useContext(UserContext);
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const handleLogout = () => {
-    fetch(`${import.meta.env.VITE_URL}/logout`, {credentials: "include",
+    fetch(`${import.meta.env.VITE_URL}/logout`, {
+      credentials: "include",
       method: "POST",
     }).then((response) => {
       setUserInfo(null);
       alert("Logged out");
-  
     });
   };
 
   const key_down = (e) => {
-    if(e.keyCode === 13 && search.length>0){
-      
+    if (e.keyCode === 13 && search.length > 0) {
+      setRedirect(true);
     }
+  };
+
+  if (redirect) {
+    return <Navigate to={`/search/${search}`} />;
   }
 
   return (
@@ -34,14 +40,36 @@ const Header = () => {
             <h2 className="logo_text">BookMyHotel</h2>
           </div>
         </Link>
-        <input
-          type="text"
-          placeholder="Start your search"
-          className="header_text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={key_down}
-        />
+
+        <div>
+          <input
+            type="text"
+            placeholder="Start your search"
+            className="header_text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={key_down}
+          />
+          <div className="search_extend">
+            <div
+              style={{
+                backgroundColor: "white",  
+                height: "200px",
+                borderRadius: "10px",
+                display: "none",
+                width: "700px",
+              }}
+            >
+              <input type="text" name="" id="" style={{}} />
+              <Input
+                placeholder="Select Date and Time"
+                size="md"
+                type="datetime-local"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="header_icon">
           {!userInfo.username && (
             <div style={{ display: "flex", gap: "25px" }}>
@@ -62,7 +90,7 @@ const Header = () => {
               <Link to={"/login"} target="_parent">
                 <h3 onClick={handleLogout}>Logout</h3>
               </Link>
-              </div>
+            </div>
           )}
 
           <Link to={"/profile"}>
