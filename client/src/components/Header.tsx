@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import "../styles/header.css";
 import { IoLogoDribbble } from "react-icons/io";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 
 const Header = () => {
   const { userInfo, setUserInfo } = useContext(UserContext);
+  const [search, setSearch] = useState('')
 
   const handleLogout = () => {
     fetch(`${import.meta.env.VITE_URL}/logout`, {credentials: "include",
@@ -17,6 +18,12 @@ const Header = () => {
   
     });
   };
+
+  const key_down = (e) => {
+    if(e.keyCode === 13 && search.length>0){
+      
+    }
+  }
 
   return (
     <div className="header">
@@ -31,6 +38,9 @@ const Header = () => {
           type="text"
           placeholder="Start your search"
           className="header_text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={key_down}
         />
         <div className="header_icon">
           {!userInfo.username && (
