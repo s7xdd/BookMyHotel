@@ -41,7 +41,7 @@ const Header = () => {
           </div>
         </Link>
 
-        <div>
+        <div className="searchbar">
           <input
             type="text"
             placeholder="Start your search"
