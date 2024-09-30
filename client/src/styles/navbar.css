@@ -23,8 +23,6 @@
   .Nav span {
     color: white;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
   .Nav__black span {
     color: #ff385c;

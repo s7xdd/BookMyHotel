@@ -1,22 +1,20 @@
 .header {
-  padding: 3px;
-
-  }
-
-  .header .nav{
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    margin: 15px 15px 15px 15px;
   }
 
 
   .header .logo{
     display: flex;
-    align-items: center;
-    h2{
-      margin: 0;
-    }
   }
 
+  .header span{
+    margin: 0px 5px 0 5px;
+    display: flex;
+    width: 88%;
+    justify-content:space-between;
+  }
   
   .header input {
     opacity: 90%;
@@ -53,6 +51,9 @@
   }
   .header_icon {
     display: flex;
+    top: 9px;
+    left: 9%;
+    position: relative;
     cursor: pointer;
   }
   .header_icon svg {
