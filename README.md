@@ -23,4 +23,28 @@
 </ul>
 
 <h1>Screenshots</h1>
-<h5>Homepage</h5>
+<h3>Homepage</h3>
+<img src='./screenshots/Home1.png'>
+<img src='./screenshots/Home2.png'>
+<img src='./screenshots/Home3.png'>
+<img src='./screenshots/Home4.png'>
+
+<h3>Registration Page</h3>
+<img src='./screenshots/Register1.png'>
+<img src='./screenshots/Register2.png'>
+
+<h3>Login Page</h3>
+<img src='./screenshots/Login1.png'>
+<img src='./screenshots/Login2.png'>
+
+<h3>Homepage after Logging in</h3>
+<img src='./screenshots/LoginHome1.png'>
+
+<h3>Product Page</h3>
+<img src='./screenshots/Product1.png'>
+<img src='./screenshots/Product2.png'>
+<img src='./screenshots/Product3.png'>
+
+<h3>Listing Page</h3>
+<img src='./screenshots/Listing1.png'>
+<img src='./screenshots/Listing2.png'>
