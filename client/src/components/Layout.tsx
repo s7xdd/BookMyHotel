@@ -1,5 +1,5 @@
+import { Navbar } from "react-bootstrap"
 import Footer from "./Footer"
-import Header from "./Header"
 
 const Layout = ({children}) => {
   return (

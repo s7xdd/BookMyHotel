@@ -35,10 +35,8 @@ const Loginpage = () => {
   }
 
   return (
-    <>
-      <div className="nav">
-        <Header />
-      </div>
+    <div className="nav">
+      <Header />
       <div className="login_main container">
         <form onSubmit={handleSubmit}>
           <div className="login_inner">
@@ -85,7 +83,7 @@ const Loginpage = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
