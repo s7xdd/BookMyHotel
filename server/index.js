@@ -330,7 +330,7 @@ app.delete('/post/:id', async (req,res) => {
             const postDoc = await PostModel.findById(id);
             if(postDoc){
                 const isHost = postDoc.host == info.id
-                if(!isAuthor){
+                if(!isHost){
                     return res.status(400).json('You are not the author')
                 }
                 await postDoc.deleteOne({_id: id});

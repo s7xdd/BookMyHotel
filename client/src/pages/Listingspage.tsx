@@ -20,14 +20,6 @@ const Listingspage = () => {
     })
   },[numberListings])
 
-  const handleEdit = (id) => {
-    alert(`Edit listing ${id}`);
-  };
-
-  const handleDelete = (id) => {
-    setListings(listings.filter(listing => listing.id !== id));
-  };
-
   if(!userInfo.username){
     return <Navigate to={'/login'}/>
   }
@@ -49,7 +41,7 @@ const Listingspage = () => {
           </div>
       </div>
       {listings && listings.map((item) => (
-        <Listings title={item.title} price={item.price} img={item.img} location={item.location} date={item.createdAt}/>
+        <Listings id={item._id} title={item.title} price={item.price} img={item.img} location={item.location} date={item.createdAt}/>
       ))}
     </div>
   );
