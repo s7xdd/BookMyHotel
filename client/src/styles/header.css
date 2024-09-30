@@ -17,7 +17,6 @@
   }
   
   .header input {
-    margin-left: 100px;
     opacity: 90%;
     background-color: white;
     padding: 15px;
@@ -34,6 +33,7 @@
     opacity: 0.6;
     font-weight: normal;
   }
+
 
   .mobile_text,
   .mobile_icon {
@@ -59,6 +59,9 @@
   .header_icon svg {
     margin-top: 3px;
   }
+
+ 
+
   @media (max-width: 1064px) {
     .header_icon {
       left: 2%;

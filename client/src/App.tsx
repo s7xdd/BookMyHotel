@@ -12,6 +12,7 @@ const Profilepage = lazy(() => import("./pages/Profilepage"));
 const Listingspage = lazy(() => import("./pages/Listingspage"));
 import { UserContextProvider } from "./UserContext";
 import SearchProducts from "./pages/Searchproducts";
+import Editlistingpage from "./pages/Editlistingpage";
 const CreateListing = lazy(() => import("./pages/Newlistingpage"));
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/listings" Component={Listingspage} />
               <Route path="newlisting" Component={CreateListing}/>
               <Route path="/search/:search" Component={SearchProducts}/>
+              <Route path="/edit/:id" Component={Editlistingpage}/>
             </Routes>
             </Suspense>
           </Router>
