@@ -7,7 +7,7 @@
   <li>React Lazy Loading</li>
   <li>ChakraUI</li>
   <li>JWT Web Token</li>
-  <li>Bcrypt</li>
+  <li>Bcrypt Hashing</li>
   <li>NodeJs</li>
   <li>ExpressJs</li>
   <li>MongoDB</li>
@@ -29,18 +29,26 @@
 <img src='./screenshots/Home3.png'>
 <img src='./screenshots/Home4.png'>
 
+</br>
 <h3>Registration Page</h3>
+</br>
 <img src='./screenshots/Register1.png'>
 <img src='./screenshots/Register2.png'>
 
+</br>
 <h3>Login Page</h3>
+</br>
 <img src='./screenshots/Login1.png'>
 <img src='./screenshots/Login2.png'>
 
+</br>
 <h3>Homepage after Logging in</h3>
+</br>
 <img src='./screenshots/LoginHome1.png'>
 
+</br>
 <h3>Product Page</h3>
+</br>
 <img src='./screenshots/Product1.png'>
 <img src='./screenshots/Product2.png'>
 <img src='./screenshots/Product3.png'>
