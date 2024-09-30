@@ -63,7 +63,9 @@ const Listings = ({ id, date, title, location, price, img }) => {
               <h6>${price}</h6>
               <a>ACTIVE</a>
               <div className="buttons">
-                <button>Edit</button>
+                <Link to={`/edit/${id}`}>
+                  <button>Edit</button>
+                </Link>
                 <button
                   onClick={deleteListing}
                 >

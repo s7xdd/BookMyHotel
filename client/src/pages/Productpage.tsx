@@ -35,7 +35,7 @@ const Productpage = () => {
                 <i>
                   {items.rating} <i style={{ color: "#717171" }}>·</i>{" "}
                 </i>
-                <i>{items.location},United States</i>
+                <i>{items.location}</i>
                 <i style={{ color: "black", textDecoration: "none" }}>
                   <i style={{ color: "#717171" }}>·</i> ${items.price}
                 </i>

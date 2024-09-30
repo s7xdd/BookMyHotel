@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
+import '../styles/SearchProducts.css'
 
 const SearchProducts = () => {
     const {search} = useParams()
