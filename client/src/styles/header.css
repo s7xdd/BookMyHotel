@@ -4,6 +4,7 @@
     margin: 15px 15px 15px 15px;
   }
 
+
   .header .logo{
     display: flex;
   }
@@ -28,10 +29,12 @@
     font-weight: bold;
     width: 480px;
   }
+
   .header_text {
     opacity: 0.6;
     font-weight: normal;
   }
+
   .mobile_text,
   .mobile_icon {
     display: none;

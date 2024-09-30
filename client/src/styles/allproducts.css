@@ -9,3 +9,23 @@ div.allproducts h1{
     margin-left: 80px;
     margin-top: 40px;
 }
+
+@media screen and (width < 871px) {
+    div.allproducts{
+        .show_all{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+    }
+}
+
+@media screen and (width < 753px) {
+    div.allproducts{
+        .show_all{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5px;
+        }
+    }
+}
