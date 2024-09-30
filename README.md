@@ -53,6 +53,13 @@
 <img src='./screenshots/Product2.png'>
 <img src='./screenshots/Product3.png'>
 
+</br>
 <h3>Listing Page</h3>
+</br>
 <img src='./screenshots/Listing1.png'>
 <img src='./screenshots/Listing2.png'>
+
+</br>
+<h3>Deleting a listing</h3>
+</br>
+<img src='./screenshots/DeleteListing.png'>
