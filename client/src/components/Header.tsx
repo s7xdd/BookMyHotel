@@ -33,8 +33,7 @@ const Header = () => {
 
   return (
     <div className="header">
-      <span>
-      
+      <span className="nav_inner">
         <Link to={"/"} target="_parent">
           <div className="logo">
             <IoLogoDribbble size={40} />
