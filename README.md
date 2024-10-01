@@ -5,7 +5,6 @@
 <ul>
   <li>ViteJs</li>
   <li>React Lazy Loading</li>
-  <li>ChakraUI</li>
   <li>JWT Web Token</li>
   <li>Bcrypt Hashing</li>
   <li>NodeJs</li>
