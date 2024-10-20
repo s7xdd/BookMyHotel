@@ -24,9 +24,6 @@
 <h1>Screenshots</h1>
 <h3>Homepage</h3>
 <img src='./screenshots/Home1.png'>
-<img src='./screenshots/Home2.png'>
-<img src='./screenshots/Home3.png'>
-<img src='./screenshots/Home4.png'>
 
 </br>
 <h3>Registration Page</h3>
